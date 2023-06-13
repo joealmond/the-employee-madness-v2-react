@@ -19,7 +19,7 @@ const deleteEmployee = (id) => {
 const ToolList = () => {
   const [loading, setLoading] = useState(true);
   const [employees, setEmployees] = useState(null);
-  const [searchQuery, setSearchQuery] = useState()
+  const [searchQuery, setSearchQuery] = useState('')
 
   const handleDelete = (id) => {
     deleteEmployee(id);

@@ -7,6 +7,7 @@ import Layout from "./Pages/Layout";
 import ErrorPage from "./Pages/ErrorPage";
 import EmployeeList from "./Pages/EmployeeList";
 import TopPaidList from "./Pages/TopPaidList";
+import ToolList from "./Pages/ToolList";
 import EmployeeCreator from "./Pages/EmployeeCreator";
 import EmployeeUpdater from "./Pages/EmployeeUpdater";
 
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
   {
     path: "/top-paid",
     element: <TopPaidList />,
+  },
+  {
+    path: "/tools",
+    element: <ToolList />,
   },
 ]);
 

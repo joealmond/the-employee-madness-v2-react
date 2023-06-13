@@ -23,6 +23,11 @@ app.get("/api/employees/:id", async (req, res) => {
   return res.json(employee);
 });
 
+app.get("/api/worklog/:id", async (req, res) => {
+  const employee = await EmployeeModel.findById(req.params.id);
+  return res.json(employee);
+});
+
 app.post("/api/employees/", async (req, res, next) => {
   const employee = req.body;
 
@@ -46,6 +51,7 @@ app.patch("/api/employees/:id", async (req, res, next) => {
     return next(err);
   }
 });
+
 
 app.delete("/api/employees/:id", async (req, res, next) => {
   try {

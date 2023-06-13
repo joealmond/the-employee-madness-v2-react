@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Loading from "../Components/Loading";
 import EmployeeTable from "../Components/EmployeeTable";
 
+
 const fetchEmployees = () => {
   return fetch("/api/employees").then((res) => res.json());
 };
@@ -25,18 +26,21 @@ const EmployeeList = () => {
   };
 
   useEffect(() => {
-    fetchEmployees()
-      .then((employees) => {
-        setLoading(false);
-        setEmployees(employees);
-      })
+    fetchEmployees().then((employees) => {
+      setLoading(false);
+      setEmployees(employees);
+    });
   }, []);
 
   if (loading) {
     return <Loading />;
   }
 
-  return <EmployeeTable employees={employees} onDelete={handleDelete} />;
+  return (
+    <>
+      <EmployeeTable employees={employees} onDelete={handleDelete} />;
+    </>
+  );
 };
 
 export default EmployeeList;

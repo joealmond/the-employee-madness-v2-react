@@ -19,6 +19,18 @@ app.get("/api/tools/", async (req, res) => {
   return res.json(tools);
 });
 
+app.post("/api/tools/", async (req, res, next) => {
+  const tool = req.body;
+  console.log(tool)
+
+  try {
+    const saved = await ToolModel.create(tool);
+    return res.json(saved);
+  } catch (err) {
+    return next(err);
+  }
+});
+
 app.get("/api/employees/", async (req, res) => {
   const employees = await EmployeeModel.find().sort({ created: "desc" });
   return res.json(employees);

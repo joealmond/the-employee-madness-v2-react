@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import Loading from "../Components/Loading";
-import EmployeeTable from "../Components/EmployeeTable";
+import ToolTable from "../Components/ToolTable/ToolTable";
 import Search from "../Components/Search/Search";
+import CreateTool from "../Components/CreateTool/CreateTool";
 
 const filterSearch = (query, tools) => {
   return tools.filter((tool)=>tool.name.toLowerCase().includes(query))
@@ -18,13 +19,13 @@ const deleteEmployee = (id) => {
 
 const ToolList = () => {
   const [loading, setLoading] = useState(true);
-  const [employees, setEmployees] = useState(null);
+  const [tools, setTools] = useState(null);
   const [searchQuery, setSearchQuery] = useState('')
 
   const handleDelete = (id) => {
     deleteEmployee(id);
 
-    setEmployees((employees) => {
+    setTools((employees) => {
       return employees.filter((employee) => employee._id !== id);
     });
   };
@@ -33,9 +34,9 @@ const ToolList = () => {
     fetchTools().then((employees) => {
       setLoading(false);
       if (searchQuery) {
-        setEmployees(filterSearch(searchQuery, employees));
+        setTools(filterSearch(searchQuery, employees));
       } else {
-        setEmployees(employees);
+        setTools(employees);
       }
     });
   }, [searchQuery]);
@@ -46,8 +47,9 @@ const ToolList = () => {
 
   return (
     <>
+      <CreateTool/>
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <EmployeeTable employees={employees} onDelete={handleDelete} />
+      <ToolTable tools={tools} onDelete={handleDelete} />
     </>
   );
 };

@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import Layout from "./Pages/Layout";
 import ErrorPage from "./Pages/ErrorPage";
 import EmployeeList from "./Pages/EmployeeList";
+import TopPaidList from "./Pages/TopPaidList";
 import EmployeeCreator from "./Pages/EmployeeCreator";
 import EmployeeUpdater from "./Pages/EmployeeUpdater";
 
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
         element: <FormTest />,
       },
     ],
+  },
+  {
+    path: "/top-paid",
+    element: <TopPaidList />,
   },
 ]);
 

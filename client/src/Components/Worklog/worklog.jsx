@@ -29,39 +29,51 @@ const Worklog = () => {
     });
   }, [id]);
 
-  function handleSubmit() {
 
-  }
+  const handleSubmit = (employee) => {
+    updateEmployee(employee)
+      .then(() => {
+        navigate("/");
+      });
+  };
 
   return (
     <div>
-      <div>
-        <p>Employee: {employee?.name}</p>
-      </div>
       <form className="EmployeeForm" onSubmit={handleSubmit}>
       <div className="control">
-        <label htmlFor="name">Label:</label>
+        <label htmlFor="name">Name:</label>
+        <input
+          value={employee?.name}
+          name="name"
+          id="name"
+          disabled
+        />
+      </div>
+      
+      <div className="control">
+        <label htmlFor="label">Label:</label>
         <input
           value={label}
           onChange={(e) => setLabel(e.target.value)}
-          name="name"
-          id="name"
+          name="label"
+          id="label"
         />
       </div>
 
       <div className="control">
-        <label htmlFor="level">Hours:</label>
+        <label htmlFor="hours">Hours:</label>
         <input
           value={hours}
           onChange={(e) => setHours(e.target.value)}
-          name="level"
-          id="level"
+          type="number"
+          name="hours"
+          id="hours"
         />
       </div>
 
       <div className="buttons">
         <button type="submit" >
-          {employee ? "Update Employee" : "Create Employee"}
+          Update Worklog
         </button>
 
         <button type="button" onClick={()=> navigate("/")}>
@@ -70,7 +82,7 @@ const Worklog = () => {
       </div>
     </form>
       <div>
-        <p>Worklog: </p>
+        <h3>Worklog History:</h3>
         {employee?.worklog.map((log, i)=>(
             <ul key={i}>
                 <li>log</li>

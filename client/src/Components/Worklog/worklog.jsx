@@ -25,25 +25,29 @@ const Worklog = () => {
 
   useEffect(() => {
     fetchEmployee(id).then((employee) => {
-      if (employee) setEmployee(employee);
+      setEmployee(employee);
     });
   }, [id]);
 
 
-  const handleSubmit = (employee) => {
-    updateEmployee(employee)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateEmployee({...employee, worklog: [...employee.worklog,{
+      label: label,
+      hours: parseInt(hours),
+    }]})
       .then(() => {
-        navigate("/");
+        // navigate("/");
       });
   };
 
   return (
     <div>
-      <form className="EmployeeForm" onSubmit={handleSubmit}>
+      <form className="EmployeeForm" onSubmit={handleSubmit} >
       <div className="control">
         <label htmlFor="name">Name:</label>
         <input
-          value={employee?.name}
+          value={employee?.name ?? ""}
           name="name"
           id="name"
           disabled
@@ -83,11 +87,11 @@ const Worklog = () => {
     </form>
       <div>
         <h3>Worklog History:</h3>
-        {employee?.worklog.map((log, i)=>(
-            <ul key={i}>
-                <li>log</li>
-            </ul>
-        ))}
+        <ul >
+        {employee && employee.worklog.map((log, i)=>(
+                <li key={i} >{log.label}{" "}{log.hours}</li>
+                ))}
+                </ul>
       </div>
     </div>
   );

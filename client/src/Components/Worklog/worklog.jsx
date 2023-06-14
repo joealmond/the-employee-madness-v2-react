@@ -17,8 +17,11 @@ const fetchEmployee = (id) => {
 
 const Worklog = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [employee, setEmployee] = useState(null);
+  const [label, setLabel] = useState('');
+  const [hours, setHours] = useState('');
 
   useEffect(() => {
     fetchEmployee(id).then((employee) => {
@@ -26,18 +29,46 @@ const Worklog = () => {
     });
   }, [id]);
 
+  function handleSubmit() {
+
+  }
+
   return (
     <div>
       <div>
-        <p>Employee: </p>
-        {employee?.name}
+        <p>Employee: {employee?.name}</p>
       </div>
-      <div>
-        <label>Add log: 
-            <input type="text" />
+      <form className="EmployeeForm" onSubmit={handleSubmit}>
+      <div className="control">
+        <label htmlFor="name">Label:</label>
+        <input
+          value={label}
+          onChange={(e) => setLabel(e.target.value)}
+          name="name"
+          id="name"
+        />
+      </div>
 
-        </label>
+      <div className="control">
+        <label htmlFor="level">Hours:</label>
+        <input
+          value={hours}
+          onChange={(e) => setHours(e.target.value)}
+          name="level"
+          id="level"
+        />
       </div>
+
+      <div className="buttons">
+        <button type="submit" >
+          {employee ? "Update Employee" : "Create Employee"}
+        </button>
+
+        <button type="button" onClick={()=> navigate("/")}>
+          Cancel
+        </button>
+      </div>
+    </form>
       <div>
         <p>Worklog: </p>
         {employee?.worklog.map((log, i)=>(

@@ -7,6 +7,7 @@ const names = require("./names.json");
 const levels = require("./levels.json");
 const positions = require("./positions.json");
 const EmployeeModel = require("../db/employee.model");
+const GameModel = require("../db/game.model");
 
 const mongoUrl = process.env.MONGO_URL;
 
@@ -30,10 +31,31 @@ const populateEmployees = async () => {
   console.log("Employees created");
 };
 
+const populateGames = async () => {
+  await GameModel.deleteMany({});
+
+  const games = [{
+    "name": "Monopoly",
+    "maxPlayers": 8,
+  },
+  {
+    "name": "Chess",
+    "maxPlayers": 2,
+  },
+  {
+    "name": "Go",
+    "maxPlayers": 2,
+  }]
+
+  await GameModel.create(...games);
+  console.log("Games created");
+};
+
 const main = async () => {
   await mongoose.connect(mongoUrl);
 
   await populateEmployees();
+  await populateGames();
 
   await mongoose.disconnect();
 };

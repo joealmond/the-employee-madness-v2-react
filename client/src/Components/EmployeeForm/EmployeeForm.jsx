@@ -1,9 +1,10 @@
 import { useState } from "react";
 
-const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
+const EmployeeForm = ({ onSave, disabled, employee, onCancel, games }) => {
   const [name, setName] = useState(employee?.name ?? "");
   const [level, setLevel] = useState(employee?.level ?? "");
   const [position, setPosition] = useState(employee?.position ?? "");
+  const [favGame, setFavGame] = useState(employee?.favGame ?? "");
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -14,6 +15,7 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
         name,
         level,
         position,
+        favGame,
       });
     }
 
@@ -21,6 +23,7 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
       name,
       level,
       position,
+      favGame,
     });
   };
 
@@ -34,6 +37,14 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
           name="name"
           id="name"
         />
+      </div>
+
+      <div className="control">
+      <label htmlFor="favGame">Favorite Game:</label>
+      <select name="favGame" id="favGame" onChange={(e) => setFavGame(e.target.value)}>
+      <option value="">{favGame?.name ? favGame.name : "--Please choose an option--"}</option>
+          {games && games.map((game, i)=><option key={i} value={game._id}>{game.name}</option>)}
+      </select>
       </div>
 
       <div className="control">

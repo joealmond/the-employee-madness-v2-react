@@ -7,6 +7,7 @@ import Layout from "./Pages/Layout";
 import ErrorPage from "./Pages/ErrorPage";
 import EmployeeList from "./Pages/EmployeeList";
 import EmployeeCreator from "./Pages/EmployeeCreator";
+import GameCreator from "./Pages/GameCreator";
 import EmployeeUpdater from "./Pages/EmployeeUpdater";
 
 import "./index.css";
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
         element: <FormTest />,
       },
     ],
+  },
+  {
+    path: "/games",
+    element: <GameCreator />,
   },
 ]);
 

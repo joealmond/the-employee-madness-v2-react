@@ -18,14 +18,26 @@ const fetchEmployee = (id) => {
   return fetch(`/api/employees/${id}`).then((res) => res.json());
 };
 
+const fetchGames = () => {
+  return fetch(`/api/games`).then((res) => res.json());
+};
+
 const EmployeeUpdater = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [employee, setEmployee] = useState(null);
+  const [games, setGames] = useState(null);
   const [updateLoading, setUpdateLoading] = useState(false);
   const [employeeLoading, setEmployeeLoading] = useState(true);
 
+  useEffect(() => {
+    fetchGames()
+      .then((games) => {
+        setGames(games);
+      });
+  }, []);
+  
   useEffect(() => {
     setEmployeeLoading(true);
     fetchEmployee(id)
@@ -51,6 +63,7 @@ const EmployeeUpdater = () => {
   return (
     <EmployeeForm
       employee={employee}
+      games={games}
       onSave={handleUpdateEmployee}
       disabled={updateLoading}
       onCancel={() => navigate("/")}

@@ -27,7 +27,7 @@ const Worklog = () => {
     fetchEmployee(id).then((employee) => {
       setEmployee(employee);
     });
-  }, [id]);
+  }, [id, employee]);
 
 
   const handleSubmit = (e) => {

@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import Layout from "./Pages/Layout";
 import ErrorPage from "./Pages/ErrorPage";
 import EmployeeList from "./Pages/EmployeeList";
+import GameList from "./Pages/GameList";
 import EmployeeCreator from "./Pages/EmployeeCreator";
 import GameCreator from "./Pages/GameCreator";
 import EmployeeUpdater from "./Pages/EmployeeUpdater";
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
   {
     path: "/games",
     element: <GameCreator />,
+  },
+  {
+    path: "/games-list",
+    element: <GameList />,
   },
 ]);
 

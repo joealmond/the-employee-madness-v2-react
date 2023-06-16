@@ -24,6 +24,12 @@ app.get("/api/games/", async (req, res) => {
   return res.json(games);
 });
 
+app.get("/api/games-list", async (req, res) => {
+  console.log(req.query.maxPlayers)
+  const game = await GameModel.findById(req.query.maxPlayers);
+  return res.json(game);
+});
+
 app.get("/api/employees/:id", async (req, res) => {
   const employee = await EmployeeModel.findById(req.params.id).populate('favGame');
   return res.json(employee);

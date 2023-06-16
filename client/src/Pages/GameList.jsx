@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Loading from "../Components/Loading";
 import GameTable from "../Components/GameTable";
-import { useParams, useNavigate, useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 const fetchGames = () => {
   return fetch("/api/games").then((res) => res.json());
@@ -25,6 +25,7 @@ const GameList = () => {
   const [games, setGames] = useState(null);
   const [searchParams] = useSearchParams();
   const maxPlayers = searchParams.get('maxPlayers');
+  const { id } = useParams()
 
   const handleDelete = (id) => {
     deleteGame(id);
@@ -46,6 +47,15 @@ const GameList = () => {
   if (loading) {
     return <Loading />;
   }
+
+  if (id) {
+    const selGame = games.filter(game=>game._id === id)[0]
+    return (
+    <>
+    <p>Name: {selGame.name}</p>
+    <p>Max Players: {selGame.maxPlayers}</p>
+    </>
+  )}
 
   return <GameTable games={filteredGames} onDelete={handleDelete} />;
 };

@@ -19,8 +19,8 @@ const GameTable = ({ games, onDelete }) => (
             <td>{game.maxPlayers}</td>
             <td>{game._id}</td>
             <td>
-              <Link to={`/update/${game._id}`}>
-                <button type="button">Update</button>
+            <Link to={`/games-list/${game._id}`}>
+                <button type="button">Details</button>
               </Link>
               <button type="button" onClick={() => onDelete(game._id)}>
                 Delete

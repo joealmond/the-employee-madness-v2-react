@@ -18,6 +18,7 @@ Add two more inputs; one for the name and one for the weight. Also add a button.
 - backend routing
 - read entry fom db
 - filtering
-- clrate entry in db
+- create form
+- create entry in db
 
 ### Notes:

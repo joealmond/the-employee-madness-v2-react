@@ -5,14 +5,17 @@ import Search from "../Components/Search/Search";
 import CreateTool from "../Components/CreateTool/CreateTool";
 
 const filterSearch = (query, tools) => {
-  return tools.filter((tool)=>tool.name.toLowerCase().includes(query))
+  if (query) {
+    return tools.filter((tool)=>tool.name.toLowerCase().includes(query))
+  } 
+  return tools
 }
 const fetchTools = () => {
   return fetch("/api/tools").then((res) => res.json());
 };
 
-const deleteEmployee = (id) => {
-  return fetch(`/api/employees/${id}`, { method: "DELETE" }).then((res) =>
+const deleteTool = (id) => {
+  return fetch(`/api/tools/${id}`, { method: "DELETE" }).then((res) =>
     res.json()
   );
 };
@@ -23,33 +26,43 @@ const ToolList = () => {
   const [searchQuery, setSearchQuery] = useState('')
 
   const handleDelete = (id) => {
-    deleteEmployee(id);
+    deleteTool(id);
 
-    setTools((employees) => {
-      return employees.filter((employee) => employee._id !== id);
+    setTools((tools) => {
+      return tools.filter((tool) => tool._id !== id);
     });
   };
 
   useEffect(() => {
-    fetchTools().then((employees) => {
+    fetchTools().then((tools) => {
       setLoading(false);
-      if (searchQuery) {
-        setTools(filterSearch(searchQuery, employees));
-      } else {
-        setTools(employees);
-      }
+        setTools(tools);
     });
-  }, [searchQuery]);
+  }, [tools]);
+
+  // SOLUTION filtering and fetching:
+  // useEffect(() => {
+  //   fetchTools().then((tools) => {
+  //     setLoading(false);
+  //     if (searchQuery) {
+  //       setTools(filterSearch(searchQuery, tools));
+  //     } else {
+  //       setTools(tools);
+  //     }
+  //   });
+  // }, [searchQuery]);
 
   if (loading) {
     return <Loading />;
   }
 
+  const filteredTools = tools && filterSearch(searchQuery, tools)
+
   return (
     <>
       <CreateTool/>
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <ToolTable tools={tools} onDelete={handleDelete} />
+      <ToolTable tools={filteredTools} onDelete={handleDelete} />
     </>
   );
 };

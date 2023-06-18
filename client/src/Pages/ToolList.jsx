@@ -3,6 +3,7 @@ import Loading from "../Components/Loading";
 import ToolTable from "../Components/ToolTable/ToolTable";
 import Search from "../Components/Search/Search";
 import CreateTool from "../Components/CreateTool/CreateTool";
+import { useSearchParams } from "react-router-dom";
 
 const filterSearch = (query, tools) => {
   if (query) {
@@ -24,7 +25,9 @@ const ToolList = () => {
   const [loading, setLoading] = useState(true);
   const [tools, setTools] = useState(null);
   const [searchQuery, setSearchQuery] = useState('')
-
+  const [urlQuery] = useSearchParams()
+  const name = urlQuery.get("name");
+  
   const handleDelete = (id) => {
     deleteTool(id);
 
@@ -51,6 +54,10 @@ const ToolList = () => {
   //     }
   //   });
   // }, [searchQuery]);
+
+  useEffect(() => {
+    setSearchQuery(name)
+  }, []);
 
   if (loading) {
     return <Loading />;

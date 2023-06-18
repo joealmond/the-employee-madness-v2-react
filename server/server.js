@@ -21,7 +21,6 @@ app.get("/api/tools/", async (req, res) => {
 
 app.post("/api/tools/", async (req, res, next) => {
   const tool = req.body;
-  console.log(tool)
 
   try {
     const saved = await ToolModel.create(tool);
@@ -39,6 +38,11 @@ app.get("/api/employees/", async (req, res) => {
 app.get("/api/employees/:id", async (req, res) => {
   const employee = await EmployeeModel.findById(req.params.id);
   return res.json(employee);
+});
+
+app.get("/api/tools/:id", async (req, res) => {
+  const tool = await ToolModel.findById(req.params.id);
+  return res.json(tool);
 });
 
 app.post("/api/employees/", async (req, res, next) => {

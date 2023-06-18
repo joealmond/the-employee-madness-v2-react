@@ -10,6 +10,7 @@ import TopPaidList from "./Pages/TopPaidList";
 import ToolList from "./Pages/ToolList";
 import EmployeeCreator from "./Pages/EmployeeCreator";
 import EmployeeUpdater from "./Pages/EmployeeUpdater";
+import ToolDetails from "./Pages/ToolDetails";
 
 import "./index.css";
 import TableTest from "./Pages/TableTest";
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
   {
     path: "/tools",
     element: <ToolList />,
+  },
+  {
+    path: "/tools/:id",
+    element: <ToolDetails />,
   },
 ]);
 

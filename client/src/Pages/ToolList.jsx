@@ -7,10 +7,10 @@ import { useSearchParams } from "react-router-dom";
 
 const filterSearch = (query, tools) => {
   if (query) {
-    return tools.filter((tool)=>tool.name.toLowerCase().includes(query))
-  } 
-  return tools
-}
+    return tools.filter((tool) => tool.name.toLowerCase().includes(query));
+  }
+  return tools;
+};
 const fetchTools = () => {
   return fetch("/api/tools").then((res) => res.json());
 };
@@ -24,10 +24,10 @@ const deleteTool = (id) => {
 const ToolList = () => {
   const [loading, setLoading] = useState(true);
   const [tools, setTools] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('')
-  const [urlQuery] = useSearchParams()
+  const [searchQuery, setSearchQuery] = useState("");
+  const [urlQuery] = useSearchParams();
   const name = urlQuery.get("name");
-  
+
   const handleDelete = (id) => {
     deleteTool(id);
 
@@ -39,7 +39,7 @@ const ToolList = () => {
   useEffect(() => {
     fetchTools().then((tools) => {
       setLoading(false);
-        setTools(tools);
+      setTools(tools);
     });
   }, [tools]);
 
@@ -56,18 +56,18 @@ const ToolList = () => {
   // }, [searchQuery]);
 
   useEffect(() => {
-    setSearchQuery(name)
+    setSearchQuery(name);
   }, []);
 
   if (loading) {
     return <Loading />;
   }
 
-  const filteredTools = tools && filterSearch(searchQuery, tools)
+  const filteredTools = tools && filterSearch(searchQuery, tools);
 
   return (
     <>
-      <CreateTool/>
+      <CreateTool />
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <ToolTable tools={filteredTools} onDelete={handleDelete} />
     </>

@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-const getTools = (id) => fetch(`/api/tools/${id}`).then((res) => res.json());
+//const getTools = (id) => fetch(`/api/tools/${id}`).then((res) => res.json());
 
 const ToolDetails = () => {
   const [tools, setTools] = useState();
   const { id } = useParams();
 
   useEffect(() => {
-    getTools(id).then((tools) => {
-      setTools(tools);
-    });
+    // getTools(id).then((tools) => {
+    //   setTools(tools);
+    // });
+
+    const getTools = async (id) => {
+      const tools = await fetch(`/api/tools/${id}`)
+      setTools(tools.json())
+    }
+    getTools(id)
+    
   }, []);
 
   return (

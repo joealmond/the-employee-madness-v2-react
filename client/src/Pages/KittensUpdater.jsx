@@ -1,16 +1,14 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import KittensForm from "../Components/KittensForm";
-import Loading from "../Components/Loading";
 
-const updateEmployee = (employee) => {
-  return fetch(`/api/employees/${employee._id}`, {
-    method: "PATCH",
+const addKitten = (kitten) => {
+  return fetch(`/api/kittens/`, {
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(employee),
+    body: JSON.stringify(kitten),
   }).then((res) => res.json());
 };
 
@@ -18,41 +16,40 @@ const fetchEmployee = (id) => {
   return fetch(`/api/employees/${id}`).then((res) => res.json());
 };
 
+const fetchKittens = (employeeId) => {
+  return fetch(`/api/kittens/?employeeId=${employeeId}`).then((res) =>
+    res.json()
+  );
+};
+
 const KittensUpdates = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [employee, setEmployee] = useState(null);
-  const [updateLoading, setUpdateLoading] = useState(false);
-  const [employeeLoading, setEmployeeLoading] = useState(true);
+  const [kittens, setKittens] = useState(null);
 
   useEffect(() => {
-    setEmployeeLoading(true);
-    fetchEmployee(id)
-      .then((employee) => {
-        setEmployee(employee);
-        setEmployeeLoading(false);
-      });
+    fetchKittens(id).then((kittens) => {
+      setKittens(kittens);
+    });
+
+    fetchEmployee(id).then((employee) => {
+      setEmployee(employee);
+    });
   }, [id]);
 
-  const handleUpdateEmployee = (employee) => {
-    setUpdateLoading(true);
-    updateEmployee(employee)
-      .then(() => {
-        setUpdateLoading(false);
-        navigate("/");
-      });
+  const handleAddKitten = (kitten) => {
+    addKitten(kitten).then(() => {
+      navigate("/");
+    });
   };
-
-  if (employeeLoading) {
-    return <Loading />;
-  }
 
   return (
     <KittensForm
+      kittens={kittens}
       employee={employee}
-      onSave={handleUpdateEmployee}
-      disabled={updateLoading}
+      onSave={handleAddKitten}
       onCancel={() => navigate("/")}
     />
   );

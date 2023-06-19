@@ -1,31 +1,23 @@
 import { useState } from "react";
 
-const KittensForm = ({ onSave, disabled, employee, onCancel }) => {
-  const [kittens, setKittens] = useState(employee?.kittens);
-  const [kname, setKname] = useState('');
-  const [kweight, setKweight] = useState('');
+const KittensForm = ({ onSave, employee, kittens, onCancel }) => {
+  const [kname, setKname] = useState("");
+  const [kweight, setKweight] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-      return onSave({
-        ...employee,
-        kittens: [...kittens, {
-          name: kname,
-          weight: kweight
-        }]
-      });
-  }
+    return onSave({
+      name: kname,
+      weight: kweight,
+      employee: employee._id,
+    });
+  };
+
   return (
     <form className="EmployeeForm" onSubmit={onSubmit}>
       <div className="control">
-        <label htmlFor="name">Name:</label>
-        <input
-          value={employee?.name}
-          name="name"
-          id="name"
-          disabled
-        />
+        <h3>{employee?.name}</h3>
       </div>
 
       <div className="control">
@@ -50,18 +42,21 @@ const KittensForm = ({ onSave, disabled, employee, onCancel }) => {
       </div>
 
       <div>
-        <p>Kittens:</p>
+        <h4>Kittens:</h4>
         <ul>
-          {kittens && kittens.map((kitten, i) => 
-          (<li key={i} ><span>Name: {kitten.name} </span><span> Weight: {kitten.weight}</span></li>)
-          )}
+          {kittens &&
+            kittens.map((kitten, i) => (
+              <li key={i}>
+                <span>Name: {kitten.name}</span>
+                <span> - </span>
+                <span>Weight: {kitten.weight} kg</span>
+              </li>
+            ))}
         </ul>
       </div>
 
       <div className="buttons">
-        <button type="submit" disabled={disabled}>
-          Add Kitten
-        </button>
+        <button type="submit">Add Kitten</button>
 
         <button type="button" onClick={onCancel}>
           Cancel

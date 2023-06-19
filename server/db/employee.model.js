@@ -7,6 +7,12 @@ const EmployeeSchema = new Schema({
   name: String,
   level: String,
   position: String,
+  address: {
+    country: String, 
+    city: String, 
+    street: String,
+    zipCode: Number,
+  },
   created: {
     type: Date,
     default: Date.now,

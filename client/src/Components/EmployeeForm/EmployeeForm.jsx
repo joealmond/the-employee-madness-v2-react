@@ -4,6 +4,10 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
   const [name, setName] = useState(employee?.name ?? "");
   const [level, setLevel] = useState(employee?.level ?? "");
   const [position, setPosition] = useState(employee?.position ?? "");
+  const [started, setStarted] = useState(employee?.started ?? "");
+  const [salary, setSalary] = useState(employee?.salary ?? "");
+  const [desiredSalary, setDesiredSalary] = useState(employee?.desiredSalary ?? "");
+  const [favColor, setFavColor] = useState(employee?.favColor ?? "");
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -14,6 +18,10 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
         name,
         level,
         position,
+        started,
+        salary,
+        desiredSalary,
+        favColor,
       });
     }
 
@@ -21,6 +29,10 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
       name,
       level,
       position,
+      started,
+      salary,
+      desiredSalary,
+      favColor,
     });
   };
 
@@ -53,6 +65,50 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
           onChange={(e) => setPosition(e.target.value)}
           name="position"
           id="position"
+        />
+      </div>
+
+      <div className="control">
+        <label htmlFor="started">Started:</label>
+        <input
+          value={started}
+          onChange={(e) => setStarted(e.target.value)}
+          name="started"
+          id="started"
+          type="date"
+        />
+      </div>
+
+      <div className="control">
+        <label htmlFor="salary">Salary:</label>
+        <input
+          value={salary}
+          onChange={(e) => setSalary(e.target.value)}
+          name="salary"
+          id="salary"
+          type="number"
+        />
+      </div>
+
+      <div className="control">
+        <label htmlFor="desiredSalary">Desired Salary:</label>
+        <input
+          value={desiredSalary}
+          onChange={(e) => setDesiredSalary(e.target.value)}
+          name="desiredSalary"
+          id="desiredSalary"
+          type="number"
+        />
+      </div>
+
+      <div className="control">
+        <label htmlFor="favColor">Favorite color:</label>
+        <input
+          value={favColor}
+          onChange={(e) => setFavColor(e.target.value)}
+          name="favColor"
+          id="favColor"
+          type="color"
         />
       </div>
 

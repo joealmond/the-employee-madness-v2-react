@@ -10,7 +10,10 @@ Add text inputs for all fields of a kitten (name, weight) and an "Add Kitten" bu
 
 ### Tech concepts:
 
-- FE
+- modify schema
+- FE/backend get, patch
+- FE routing
+- FE Link, useNavigate
 
 ### Notes:
 

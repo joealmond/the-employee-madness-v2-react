@@ -8,6 +8,9 @@ import ErrorPage from "./Pages/ErrorPage";
 import EmployeeList from "./Pages/EmployeeList";
 import EmployeeCreator from "./Pages/EmployeeCreator";
 import EmployeeUpdater from "./Pages/EmployeeUpdater";
+import DivisionList from "./Pages/DivisionList";
+import DivisionCreator from "./Pages/DivisionCreator";
+import DivisionUpdater from "./Pages/DivisionUpdater";
 
 import "./index.css";
 import TableTest from "./Pages/TableTest";
@@ -30,6 +33,18 @@ const router = createBrowserRouter([
       {
         path: "/update/:id",
         element: <EmployeeUpdater />,
+      },
+      {
+        path: "/divisions/",
+        element: <DivisionList />,
+      },
+      {
+        path: "/divisions/create",
+        element: <DivisionCreator />,
+      },
+      {
+        path: "/divisions/update/:id",
+        element: <DivisionUpdater />,
       },
       {
         path: "/table-test",

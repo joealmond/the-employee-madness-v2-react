@@ -4,7 +4,7 @@ const DivisionModel = require("./db/division.model");
 const divisionRouter = express.Router();
 
 divisionRouter.get("/", async (req, res) => {
-    const divisions = await DivisionModel.find().sort({ created: "desc" });
+    const divisions = await DivisionModel.find().populate('boss').sort({ created: "desc" });
     return res.json(divisions);
   });
   

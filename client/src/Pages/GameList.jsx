@@ -27,8 +27,8 @@ const GameList = () => {
   const maxPlayers = searchParams.get('maxPlayers');
   const { id } = useParams()
 
-  const handleDelete = (id) => {
-    deleteGame(id);
+  const handleDelete = async (id) => {
+    await deleteGame(id);
     setGames((game) => {
       return game.filter((game) => game._id !== id);
     });
@@ -42,18 +42,18 @@ const GameList = () => {
       });
   }, []);
 
-  const filteredGames = games && filterByPlayers(maxPlayers, [...games])
+  const filteredGames = games && filterByPlayers(maxPlayers, games)
 
   if (loading) {
     return <Loading />;
   }
 
   if (id) {
-    const selGame = games.filter(game=>game._id === id)[0]
+    const selectedGame = games.filter(game=>game._id === id)[0]
     return (
     <>
-    <p>Name: {selGame.name}</p>
-    <p>Max Players: {selGame.maxPlayers}</p>
+    <p>Name: {selectedGame.name}</p>
+    <p>Max Players: {selectedGame.maxPlayers}</p>
     </>
   )}
 

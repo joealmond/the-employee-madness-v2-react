@@ -34,6 +34,18 @@ const router = createBrowserRouter([
         element: <EmployeeUpdater />,
       },
       {
+        path: "/games",
+        element: <GameCreator />,
+      },
+      {
+        path: "/games-list",
+        element: <GameList />,
+      },
+      {
+        path: "/games-list/:id",
+        element: <GameList />,
+      },
+      {
         path: "/table-test",
         element: <TableTest />,
       },
@@ -43,18 +55,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-  {
-    path: "/games",
-    element: <GameCreator />,
-  },
-  {
-    path: "/games-list",
-    element: <GameList />,
-  },
-  {
-    path: "/games-list/:id",
-    element: <GameList />,
-  },
+
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

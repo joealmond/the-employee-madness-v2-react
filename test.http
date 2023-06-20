@@ -20,3 +20,31 @@ Content-Type:  application/json
 {
   "name": "asd"
 }
+
+###
+GET http://localhost:8080/api/divisions/
+
+###
+POST http://localhost:8080/api/divisions/
+Content-Type: application/json
+
+{
+	"name": "Teszt Jani",
+	"boss": "6491765b17c43d6cf4a0e984",
+	"budget": "50000",
+	"location": {
+		"city": "Budapest",
+		"country": "Hungary"
+	}
+}
+
+###
+DELETE http://localhost:8080/api/divisions/64917e95bf18870ce96c3aa9
+
+###
+PATCH http://localhost:8080/api/divisions/64917edcbf18870ce96c3aae
+Content-Type:  application/json
+
+{
+  "name": "Jhon Doe"
+}

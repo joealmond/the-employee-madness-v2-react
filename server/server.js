@@ -47,6 +47,19 @@ app.patch("/api/employees/:id", async (req, res, next) => {
   }
 });
 
+app.post("/api/employees/:id", async (req, res, next) => {
+  try {
+    const employee = await EmployeeModel.findOneAndUpdate(
+      { _id: req.params.id },
+      { $push: { worklog: req.body } },
+      { new: true }
+    );
+    return res.json(employee);
+  } catch (err) {
+    return next(err);
+  }
+});
+
 app.delete("/api/employees/:id", async (req, res, next) => {
   try {
     const employee = await EmployeeModel.findById(req.params.id);

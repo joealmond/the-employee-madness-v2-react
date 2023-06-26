@@ -26,7 +26,10 @@ const EmployeeTable = ({ employees, onDelete }) => (
                 Delete
               </button>
               <Link to={`/add-worklog/${employee._id}`}>
-                <button>Worklog</button>
+                <button>Add Worklog</button>
+              </Link>
+              <Link to={'/worklog'} state={employee}>
+                <button>Show Worklog</button>
               </Link>
             </td>
           </tr>

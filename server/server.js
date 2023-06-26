@@ -48,14 +48,12 @@ app.patch("/api/employees/:id", async (req, res, next) => {
 });
 
 app.post("/api/employees/:id", async (req, res, next) => {
-  console.log(req.body)
   try {
     const employee = await EmployeeModel.findOneAndUpdate(
       { _id: req.params.id },
       { $push: req.body },
       { new: true }
     );
-    console.log(employee.responsibilities)
     return res.json(employee);
   } catch (err) {
     return next(err);

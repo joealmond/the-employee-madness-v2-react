@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const updateEmployee = async (id, stringData) => {
-  return await fetch(`/api/employees/${id}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ responsibilities: stringData }),
-  });
+  try {
+    return await fetch(`/api/employees/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ responsibilities: stringData }),
+    });
+  } catch (error) {
+    console.error("An error ocurred.", error.message);
+  }
 };
 
 const Responsibilities = () => {
@@ -17,31 +21,48 @@ const Responsibilities = () => {
   const [responsibility, setResponsibility] = useState("");
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const response = await updateEmployee(id, responsibility);
-    if (response.ok) {
-      console.log("Form submitted!");
-      setResponsibility("");
-    } else {
-      console.error("Error ocurred submitting form.");
+    try {
+      e.preventDefault();
+      const response = await updateEmployee(id, responsibility);
+      if (response.ok) {
+        console.log("Form submitted!");
+        setResponsibility("");
+      } else {
+        console.error("Error ocurred submitting form.");
+      }
+    } catch (error) {
+      console.error("An error ocurred.", error.message);
     }
   };
 
   useEffect(() => {
-    const getEmployee = async () => {
-      const res = await fetch(`/api/employees/${id}`);
-      const data = await res.json();
-      setEmployee(data);
-    };
-
-    getEmployee();
+    try {
+      const getEmployee = async () => {
+        const res = await fetch(`/api/employees/${id}`);
+        const data = await res.json();
+        setEmployee(data);
+      };
+      getEmployee();
+    } catch (error) {
+      console.error("An error ocurred.", error.message);
+    }
   }, [id, responsibility]);
+
+  const { name, responsibilities } = employee ?? {
+    name: "",
+    responsibilities: [""],
+  };
+
+  if (responsibility.trim() === "") {
+    console.error('Cannot be empty!')
+    return;
+  }
 
   return (
     <div>
-      <h2>Responsibilities of {employee?.name}:</h2>
+      <h2>Responsibilities of {name}:</h2>
       <ul>
-        {employee?.responsibilities.map((responsibility, index) => (
+        {responsibilities.map((responsibility, index) => (
           <li key={index}>{responsibility}</li>
         ))}
       </ul>

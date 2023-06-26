@@ -10,6 +10,7 @@ import EmployeeCreator from "./Pages/EmployeeCreator";
 import EmployeeUpdater from "./Pages/EmployeeUpdater";
 import WorklogCreator from "./Pages/WorklogCreator";
 import Worklog from "./Pages/Worklog";
+import WorklogFetch from "./Pages/WorklogFetch";
 
 import "./index.css";
 import TableTest from "./Pages/TableTest";
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/worklog",
         element: <Worklog />,
+      },
+      {
+        path: "/worklog/:id",
+        element: <WorklogFetch />,
       },
       {
         path: "/add-worklog/:id",

@@ -9,7 +9,6 @@ const EmployeeTable = ({
 }) => {
   const location = useLocation();
 
-  console.log(location)
   return (
   <div className="EmployeeTable">
     <table>

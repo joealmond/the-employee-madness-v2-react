@@ -12,10 +12,15 @@ const deleteEmployee = (id) => {
   );
 };
 
+const handleAlikeClick = () => {
+  console.log("alikeClick");
+};
+
 const EmployeeListFiltered = () => {
   const [loading, setLoading] = useState(true);
   const [employees, setEmployees] = useState(null);
   const [filter, setFilter] = useState("");
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
 
   const handleDelete = (id) => {
     deleteEmployee(id);
@@ -40,6 +45,12 @@ const EmployeeListFiltered = () => {
     employee.name.toLowerCase().includes(filter)
   );
 
+  const alikeEmployees = employees.filter(
+    (employee) =>
+      employee?.level === selectedEmployee?.level &&
+      employee?.position === selectedEmployee?.position
+  );
+
   return (
     <>
       <label>
@@ -50,7 +61,19 @@ const EmployeeListFiltered = () => {
           onChange={(e) => setFilter(e.target.value)}
         />
       </label>
-      <EmployeeTable employees={filteredEmployees} onDelete={handleDelete} />
+      {selectedEmployee ? (
+        <EmployeeTable
+          employees={alikeEmployees}
+          onDelete={handleDelete}
+          setSelectedEmployee={setSelectedEmployee}
+        />
+      ) : (
+        <EmployeeTable
+          employees={filteredEmployees}
+          onDelete={handleDelete}
+          setSelectedEmployee={setSelectedEmployee}
+        />
+      )}
     </>
   );
 };

@@ -10,6 +10,7 @@ import EmployeeListFiltered from "./Pages/EmployeeListFiltered";
 import EmployeeCreator from "./Pages/EmployeeCreator";
 import EmployeeUpdater from "./Pages/EmployeeUpdater";
 import Responsibilities from "./Pages/Responsibilities";
+import YearsOfExperience from "./Pages/YearsOfExperience";
 
 import "./index.css";
 import TableTest from "./Pages/TableTest";
@@ -24,6 +25,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <EmployeeList />,
+      },
+      {
+        path: "/years-of-experience",
+        element: <YearsOfExperience />,
+      },
+      {
+        path: "/years-of-experience/:yearsOfExperience",
+        element: <YearsOfExperience />,
       },
       {
         path: "/filtered",

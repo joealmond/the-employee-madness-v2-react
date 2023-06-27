@@ -8,6 +8,7 @@ const EmployeeSchema = new Schema({
   level: String,
   position: String,
   responsibilities: [String],
+  yearsOfExperience: Number,
   created: {
     type: Date,
     default: Date.now,

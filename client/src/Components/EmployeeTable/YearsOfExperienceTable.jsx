@@ -4,6 +4,7 @@ import "./EmployeeTable.css";
 const YearsOfExperienceTable = ({
   employees,
   onDelete,
+  onSort
 }) => {
 
   return (
@@ -11,7 +12,7 @@ const YearsOfExperienceTable = ({
     <table>
       <thead>
         <tr>
-          <th>Name</th>
+          <th><button onClick={onSort} >Name</button></th>
           <th>Level</th>
           <th>Years Of Experience</th>
           <th />

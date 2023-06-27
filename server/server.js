@@ -18,6 +18,16 @@ app.get("/api/employees/", async (req, res) => {
   return res.json(employees);
 });
 
+app.get("/api/employees/asc", async (req, res) => {
+  const employees = await EmployeeModel.find().sort({ name: "asc" });
+  return res.json(employees);
+});
+
+app.get("/api/employees/desc", async (req, res) => {
+  const employees = await EmployeeModel.find().sort({ name: "desc" });
+  return res.json(employees);
+});
+
 app.get("/api/employees/:id", async (req, res) => {
   const employee = await EmployeeModel.findById(req.params.id);
   return res.json(employee);

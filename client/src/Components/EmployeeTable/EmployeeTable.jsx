@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import "./EmployeeTable.css";
 
-const EmployeeTable = ({ employees, onDelete, setSelectedEmployee }) => (
+const EmployeeTable = ({
+  employees,
+  onDelete,
+  selectedEmployee,
+  setSelectedEmployee,
+}) => (
   <div className="EmployeeTable">
     <table>
       <thead>
@@ -28,7 +33,14 @@ const EmployeeTable = ({ employees, onDelete, setSelectedEmployee }) => (
               <Link to={`/responsibilities/${employee._id}`}>
                 <button type="button">Responsibilities</button>
               </Link>
-              <button type="button" onClick={()=>{setSelectedEmployee(employee)}}>
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedEmployee(
+                    selectedEmployee === employee ? null : employee
+                  );
+                }}
+              >
                 alike
               </button>
             </td>

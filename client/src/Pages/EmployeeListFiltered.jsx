@@ -41,9 +41,9 @@ const EmployeeListFiltered = () => {
     return <Loading />;
   }
 
-  const filteredEmployees = employees.filter((employee) =>
+  const filteredEmployees = filter ? employees.filter((employee) =>
     employee.name.toLowerCase().includes(filter)
-  );
+  ) : employees
 
   const alikeEmployees = employees.filter(
     (employee) =>
@@ -66,12 +66,14 @@ const EmployeeListFiltered = () => {
           employees={alikeEmployees}
           onDelete={handleDelete}
           setSelectedEmployee={setSelectedEmployee}
+          selectedEmployee={selectedEmployee}
         />
       ) : (
         <EmployeeTable
           employees={filteredEmployees}
           onDelete={handleDelete}
           setSelectedEmployee={setSelectedEmployee}
+          selectedEmployee={selectedEmployee}
         />
       )}
     </>

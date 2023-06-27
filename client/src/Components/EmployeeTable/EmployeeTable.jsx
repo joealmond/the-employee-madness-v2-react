@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./EmployeeTable.css";
 
 const EmployeeTable = ({
@@ -6,7 +6,11 @@ const EmployeeTable = ({
   onDelete,
   selectedEmployee,
   setSelectedEmployee,
-}) => (
+}) => {
+  const location = useLocation();
+
+  console.log(location)
+  return (
   <div className="EmployeeTable">
     <table>
       <thead>
@@ -33,7 +37,7 @@ const EmployeeTable = ({
               <Link to={`/responsibilities/${employee._id}`}>
                 <button type="button">Responsibilities</button>
               </Link>
-              <button
+              {location.pathname === '/filtered' && <button
                 type="button"
                 onClick={() => {
                   setSelectedEmployee(
@@ -42,13 +46,13 @@ const EmployeeTable = ({
                 }}
               >
                 alike
-              </button>
+              </button>}
             </td>
           </tr>
         ))}
       </tbody>
     </table>
   </div>
-);
+)};
 
 export default EmployeeTable;

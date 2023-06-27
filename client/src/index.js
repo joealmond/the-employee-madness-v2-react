@@ -16,6 +16,13 @@ import "./index.css";
 import TableTest from "./Pages/TableTest";
 import FormTest from "./Pages/FormTest";
 
+const NotFound = () => {
+  return (
+    <div>Page not found!</div>
+  )
+}
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -57,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: "/form-test",
         element: <FormTest />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },

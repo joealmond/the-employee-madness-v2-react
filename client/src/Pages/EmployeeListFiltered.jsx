@@ -12,10 +12,6 @@ const deleteEmployee = (id) => {
   );
 };
 
-const handleAlikeClick = () => {
-  console.log("alikeClick");
-};
-
 const EmployeeListFiltered = () => {
   const [loading, setLoading] = useState(true);
   const [employees, setEmployees] = useState(null);
@@ -41,9 +37,11 @@ const EmployeeListFiltered = () => {
     return <Loading />;
   }
 
-  const filteredEmployees = filter ? employees.filter((employee) =>
-    employee.name.toLowerCase().includes(filter)
-  ) : employees
+  const filteredEmployees = filter
+    ? employees.filter((employee) =>
+        employee.name.toLowerCase().includes(filter)
+      )
+    : employees;
 
   const alikeEmployees = employees.filter(
     (employee) =>

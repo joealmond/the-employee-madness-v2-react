@@ -27,25 +27,28 @@ const YearsOfExperience = () => {
   };
 
   useEffect(() => {
-    fetchEmployees()
-      .then((employees) => {
-        setLoading(false);
-        setEmployees(employees);
-      })
+    fetchEmployees().then((employees) => {
+      setLoading(false);
+      setEmployees(employees);
+    });
   }, []);
 
   if (loading) {
     return <Loading />;
   }
 
-  console.log(yearsOfExperience)
-
-  const filteredEmployees = yearsOfExperience ? 
-  employees.filter(employee => parseInt(employee.yearsOfExperience) >= parseInt(yearsOfExperience))
-  : employees 
+  const filteredEmployees = yearsOfExperience
+    ? employees.filter(
+        (employee) =>
+          parseInt(employee.yearsOfExperience) >= parseInt(yearsOfExperience)
+      )
+    : employees;
 
   return (
-  <YearsOfExperieneceTable employees={filteredEmployees} onDelete={handleDelete} />
+    <YearsOfExperieneceTable
+      employees={filteredEmployees}
+      onDelete={handleDelete}
+    />
   );
 };
 

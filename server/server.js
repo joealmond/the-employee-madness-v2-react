@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const EmployeeModel = require("./db/employee.model");
+const PositionModel = require("./db/position.model");
 
 const { MONGO_URL, PORT = 8080 } = process.env;
 
@@ -13,8 +14,13 @@ if (!MONGO_URL) {
 const app = express();
 app.use(express.json());
 
+app.get("/api/positions/", async (req, res) => {
+  const positions = await PositionModel.find();
+  return res.json(positions);
+});
+
 app.get("/api/employees/", async (req, res) => {
-  const employees = await EmployeeModel.find().sort({ created: "desc" });
+  const employees = await EmployeeModel.find().populate('position').sort({ created: "desc" });
   return res.json(employees);
 });
 

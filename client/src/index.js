@@ -11,6 +11,7 @@ import EmployeeCreator from "./Pages/EmployeeCreator";
 import EmployeeUpdater from "./Pages/EmployeeUpdater";
 import Responsibilities from "./Pages/Responsibilities";
 import YearsOfExperience from "./Pages/YearsOfExperience";
+import Positions from "./Pages/Positions";
 
 import "./index.css";
 import TableTest from "./Pages/TableTest";
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "/responsibilities/:id",
         element: <Responsibilities />,
+      },
+      {
+        path: "/positions",
+        element: <Positions />,
       },
       {
         path: "/table-test",

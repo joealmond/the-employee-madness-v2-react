@@ -25,7 +25,7 @@ const EmployeeTable = ({
           <tr key={employee._id}>
             <td>{employee.name}</td>
             <td>{employee.level}</td>
-            <td>{employee.position}</td>
+            <td>{employee.position?.name}</td>
             <td>
               <Link to={`/update/${employee._id}`}>
                 <button type="button">Update</button>

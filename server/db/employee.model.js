@@ -6,7 +6,7 @@ const { Schema } = mongoose;
 const EmployeeSchema = new Schema({
   name: String,
   level: String,
-  position: String,
+  position: { type: Schema.Types.ObjectId, ref: "Position" },
   responsibilities: [String],
   yearsOfExperience: Number,
   created: {

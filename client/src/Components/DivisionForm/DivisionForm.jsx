@@ -1,4 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+const fetchEmployees = () => {
+  return fetch("/api/employees").then((res) => res.json());
+};
 
 const DivisionForm = ({ onSave, disabled, division, onCancel }) => {
   const [name, setName] = useState(division?.name ?? "");
@@ -6,6 +10,13 @@ const DivisionForm = ({ onSave, disabled, division, onCancel }) => {
   const [budget, setBudget] = useState(division?.budget ?? "");
   const [country, setCountry] = useState(division?.location?.country ?? "");
   const [city, setCity] = useState(division?.location?.city ?? "");
+  const [employees, setEmployees] = useState([]);
+
+  useEffect(() => {
+    fetchEmployees().then((employeesData) => {
+      setEmployees(employeesData)
+    })
+  }, []);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -16,10 +27,11 @@ const DivisionForm = ({ onSave, disabled, division, onCancel }) => {
         name,
         boss,
         budget,
-        location:{...division.location,
-          country: division.location.country,
-          city: division.location.city
-        }
+        location: {
+          ...division.location,
+          country,
+          city,
+        },
       });
     }
 
@@ -27,10 +39,10 @@ const DivisionForm = ({ onSave, disabled, division, onCancel }) => {
       name,
       boss,
       budget,
-      location:{
-        country: division.location.country,
-        city: division.location.city
-      }
+      location: {
+        country,
+        city,
+      },
     });
   };
 
@@ -47,13 +59,22 @@ const DivisionForm = ({ onSave, disabled, division, onCancel }) => {
       </div>
 
       <div className="control">
-        <label htmlFor="level">Boss:</label>
-        <input
+        <label htmlFor="boss">Boss:</label>
+
+        <select
+          name="boss"
+          id="boss"
           value={boss}
+          required
           onChange={(e) => setBoss(e.target.value)}
-          name="level"
-          id="level"
-        />
+        >
+          <option value="">--Please choose an option--</option>
+          {employees && employees.map((employee, index) => {
+            return (
+              <option key={index} value={employee._id}>{employee.name}</option>
+            )
+          })}
+        </select>
       </div>
 
       <div className="control">
@@ -100,4 +121,3 @@ const DivisionForm = ({ onSave, disabled, division, onCancel }) => {
 };
 
 export default DivisionForm;
-

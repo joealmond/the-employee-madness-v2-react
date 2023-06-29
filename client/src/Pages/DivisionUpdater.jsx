@@ -21,7 +21,7 @@ const fetchDivision = (id) => {
 const DivisionUpdater = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
+  
   const [division, setDivision] = useState(null);
   const [updateLoading, setUpdateLoading] = useState(false);
   const [divisionLoading, setDivisionLoading] = useState(true);

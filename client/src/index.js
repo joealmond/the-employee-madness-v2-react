@@ -11,6 +11,7 @@ import EmployeeUpdater from "./Pages/EmployeeUpdater";
 import DivisionList from "./Pages/DivisionList";
 import DivisionCreator from "./Pages/DivisionCreator";
 import DivisionUpdater from "./Pages/DivisionUpdater";
+import EmployeeAssigner from "./Pages/EmployeeAssigner";
 
 import "./index.css";
 import TableTest from "./Pages/TableTest";
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/update/:id",
         element: <EmployeeUpdater />,
+      },
+      {
+        path: "/employees/:id/assign",
+        element: <EmployeeAssigner />,
       },
       {
         path: "/divisions/",

@@ -22,6 +22,10 @@ app.get("/api/employees/:id", async (req, res) => {
   const employee = await EmployeeModel.findById(req.params.id);
   return res.json(employee);
 });
+app.get("/api/employees/experience/:experience", async (req, res) => {
+  const employee = await EmployeeModel.find({yearsOfExperience: { $gt: req.params.experience }});
+  return res.json(employee);
+});
 
 app.post("/api/employees/", async (req, res, next) => {
   const employee = req.body;

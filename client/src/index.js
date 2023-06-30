@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import Layout from "./Pages/Layout";
 import ErrorPage from "./Pages/ErrorPage";
 import EmployeeList from "./Pages/EmployeeList";
+import ExpereineceList from "./Pages/ExpereineceList";
 import EmployeeCreator from "./Pages/EmployeeCreator";
 import EmployeeUpdater from "./Pages/EmployeeUpdater";
 
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/update/:id",
         element: <EmployeeUpdater />,
+      },
+      {
+        path: "/years-of-experience/:yearsOfExperience",
+        element: <ExpereineceList />,
       },
       {
         path: "/table-test",

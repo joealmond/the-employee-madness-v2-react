@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
   const [name, setName] = useState(employee?.name ?? "");
   const [level, setLevel] = useState(employee?.level ?? "");
   const [position, setPosition] = useState(employee?.position ?? "");
+  const [companyName, setCompanyName] = useState(employee?.company?.name ?? "");
+  const [companies, setCompanies] = useState([]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -14,6 +16,9 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
         name,
         level,
         position,
+        company: {
+          name: companyName
+        }
       });
     }
 
@@ -21,8 +26,23 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
       name,
       level,
       position,
+      company: {
+        name: companyName
+      }
     });
   };
+
+  useEffect(()=>{
+
+    const getCompanies = async () => {
+      const res = await fetch('/api/company');
+      const resData = await res.json();
+      setCompanies(resData)
+      // console.log(resData);
+    }
+    getCompanies();
+
+  },[])
 
   return (
     <form className="EmployeeForm" onSubmit={onSubmit}>
@@ -34,6 +54,16 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
           name="name"
           id="name"
         />
+      </div>
+
+      <div className="control">
+        <label htmlFor="company">Company:</label>
+        <select name="company"  value={companyName} onChange={(e)=>setCompanyName(e.target.value)}>
+          <option value="">--Please choose an option--</option>
+          {companies.map(company=>(
+            <option key={company._id} value={company.name}>{company.name}</option>
+          ))}
+        </select>
       </div>
 
       <div className="control">

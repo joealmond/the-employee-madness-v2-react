@@ -3,17 +3,12 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-const EmployeeSchema = new Schema({
+const CompanySchema = new Schema({
   name: String,
-  level: String,
-  position: String,
-  company: {
-    name: String
-  },
   created: {
     type: Date,
     default: Date.now,
   },
 });
 
-module.exports = mongoose.model("Employee", EmployeeSchema);
+module.exports = mongoose.model("Company", CompanySchema);

@@ -14,7 +14,16 @@ const app = express();
 app.use(express.json());
 
 app.get("/api/employees/", async (req, res) => {
-  const employees = await EmployeeModel.find().sort({ created: "desc" });
+  let employees;
+
+  if (req.query.exp) {
+    employees = await EmployeeModel.find({
+      yearsOfExperience: { $gt: req.query.exp },
+    }).sort({ name: req.query.sortBy });
+  } else {
+    employees = await EmployeeModel.find().sort({ created: "desc" });
+  }
+
   return res.json(employees);
 });
 
@@ -56,6 +65,11 @@ app.delete("/api/employees/:id", async (req, res, next) => {
     return next(err);
   }
 });
+
+app.all("*", (req,res) => {
+  return res.status(404).send('Page not found. 404 error.')
+  
+})
 
 const main = async () => {
   await mongoose.connect(MONGO_URL);

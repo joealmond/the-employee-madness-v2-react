@@ -4,6 +4,9 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
   const [name, setName] = useState(employee?.name ?? "");
   const [level, setLevel] = useState(employee?.level ?? "");
   const [position, setPosition] = useState(employee?.position ?? "");
+  const [yearsOfExperience, setYearsOfExperience] = useState(
+    employee?.yearsOfExperience ?? ""
+  );
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -14,6 +17,7 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
         name,
         level,
         position,
+        yearsOfExperience,
       });
     }
 
@@ -21,6 +25,7 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
       name,
       level,
       position,
+      yearsOfExperience,
     });
   };
 
@@ -45,6 +50,18 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
           id="level"
         />
       </div>
+
+      {level !== "Junior" && (
+        <div className="control">
+          <label htmlFor="yearsOfExperience">Years Of Experience:</label>
+          <input
+            value={yearsOfExperience}
+            onChange={(e) => setYearsOfExperience(e.target.value)}
+            name="yearsOfExperience"
+            id="yearsOfExperience"
+          />
+        </div>
+      )}
 
       <div className="control">
         <label htmlFor="position">Position:</label>

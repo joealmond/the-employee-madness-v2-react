@@ -8,6 +8,8 @@ import ErrorPage from "./Pages/ErrorPage";
 import EmployeeList from "./Pages/EmployeeList";
 import EmployeeCreator from "./Pages/EmployeeCreator";
 import EmployeeUpdater from "./Pages/EmployeeUpdater";
+import EmployeeByExperienceList from "./Pages/EmployeeByExperienceList";
+import NotFound from "./Pages/NotFound";
 
 import "./index.css";
 import TableTest from "./Pages/TableTest";
@@ -32,12 +34,20 @@ const router = createBrowserRouter([
         element: <EmployeeUpdater />,
       },
       {
+        path: "/years-of-experience/:exp",
+        element: <EmployeeByExperienceList />,
+      },
+      {
         path: "/table-test",
         element: <TableTest />,
       },
       {
         path: "/form-test",
         element: <FormTest />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },

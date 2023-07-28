@@ -64,6 +64,10 @@ app.delete("/api/employees/:id", async (req, res, next) => {
   }
 });
 
+app.all("*", (req, res) => {
+  return res.status(404).send("404 Not found!")
+})
+
 const main = async () => {
   await mongoose.connect(MONGO_URL);
 

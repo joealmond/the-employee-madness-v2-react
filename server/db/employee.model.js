@@ -7,6 +7,10 @@ const EmployeeSchema = new Schema({
   name: String,
   level: String,
   position: String,
+  yearsOfExperience: {
+    type: Number,
+    default: 0
+  },
   created: {
     type: Date,
     default: Date.now,

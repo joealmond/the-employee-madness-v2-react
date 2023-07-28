@@ -14,7 +14,14 @@ const app = express();
 app.use(express.json());
 
 app.get("/api/employees/", async (req, res) => {
-  const employees = await EmployeeModel.find().sort({ created: "desc" });
+  let employees;
+  if (req.query.experience) {
+    employees = await EmployeeModel.find({
+      yearsOfExperience: { $gt: req.query.experience },
+    }).sort({ name: req.query.sort });
+  } else {
+    employees = await EmployeeModel.find().sort({ created: "desc" });
+  }
   return res.json(employees);
 });
 
